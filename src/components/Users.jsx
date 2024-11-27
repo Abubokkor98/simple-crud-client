@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Navbar from "./Navbar";
 
 export default function Users() {
-  const users = useLoaderData();
+  const LoadedUsers = useLoaderData();
+  const [users, setUsers] = useState(LoadedUsers);
 
   const handleDelete = (_id) => {
     console.log('delete', _id);
@@ -14,7 +15,9 @@ export default function Users() {
     .then(data=>{
         console.log(data);
         if(data.deletedCount > 0){
-            alert('deleted succesfully')
+            alert('deleted succesfully');
+            const remainingUsers = users.filter(user=>user._id !==_id);
+            setUsers(remainingUsers);
         }
     })
   };

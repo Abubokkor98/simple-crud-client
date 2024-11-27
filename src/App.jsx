@@ -1,6 +1,8 @@
 import "./App.css";
+import Navbar from "./components/Navbar";
 
 function App() {
+
 
   const handleAddUser = e =>{
     e.preventDefault();
@@ -20,10 +22,15 @@ function App() {
     .then(res=>res.json())
     .then(data=>{
       console.log(data);
+      if(data.insertedId){
+        alert('User added successfully')
+        form.reset();
+      }
     })
   }
   return (
     <>
+    <Navbar></Navbar>
       <h1>Simple CRUD</h1>
       <form onSubmit={handleAddUser}>
         <input type="text" name="name" placeholder="name" id="" />
